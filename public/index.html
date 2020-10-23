@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>首页</p>
+</body>
+
+</html>
+<script>
+    var newWeb = function () {
+        var url = "ws://10.20.23.115:8098/echo"
+        console.log(url);
+        var ws = new WebSocket(url);
+        ws.onopen = function () {
+            ws.send('老子终于连上了');
+        }
+        ws.onmessage = function (evt) {
+            console.log(evt.data);
+            ws.close();
+        };
+        ws.onclose = function (evt) {
+            console.log("WebSocketClosed!");
+        };
+        ws.onerror = function (evt) {
+            console.log('WebSocketError!');
+        };
+    }
+    newWeb();
+</script>
